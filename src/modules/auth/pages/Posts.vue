@@ -4,7 +4,5 @@
 
 <script lang="ts"></script>
 <route lang="yaml">
-  name: Posts
-  meta: 
-    requiresAuth: true
-  </route>
+name: Posts
+</route>

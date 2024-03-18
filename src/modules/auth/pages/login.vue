@@ -11,7 +11,7 @@
       <h2
         class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
       >
-        Sign in to your account
+        {{ $t("Sign in to your account") }}
       </h2>
     </div>
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -38,9 +38,9 @@
           }"
         />
 
-        <BaseButton type="submit" variant="form-submit" size="form-submit"
-          >Sign In</BaseButton
-        >
+        <BaseButton type="submit" variant="form-submit" size="form-submit">{{
+          $t("Sign In")
+        }}</BaseButton>
       </BaseForm>
     </div>
   </div>
@@ -62,7 +62,9 @@ const authStore = useAuthStore();
 
 const login = async (): Promise<void> => {
   try {
-    const { token } = await authStore.login(model);
+    const { token, image } = await authStore.login(model);
+
+    localStorage.setItem("image", image);
 
     authStore.setLoggedIn(true);
     authStore.setToken(token);

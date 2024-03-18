@@ -56,17 +56,17 @@ router.beforeEach((to, from, next) => {
     });
   }
 
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
-    // this route requires auth, check if logged in
-    // if not, redirect to login page.
-    if (!authStore.getToken()) {
-      next({ name: "Login" });
-    } else {
-      next(); // go to wherever I'm going
-    }
-  } else {
-    next(); // does not require auth, make sure to always call next()!
+  const toAuthLayout = to.meta.layout === "authLayout";
+  const requiresAuth = Object.hasOwn(to.meta, "requiresAuth")
+    ? to.meta.requiresAuth
+    : !toAuthLayout;
+  const hasToken = authStore.getToken();
+
+  if (requiresAuth && !hasToken) {
+    return next({ name: "Login" });
   }
+
+  next();
 });
 
 export default router;

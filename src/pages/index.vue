@@ -6,6 +6,4 @@
 
 <route lang="yaml">
 name: Home
-meta: 
-  requiresAuth: true
 </route>

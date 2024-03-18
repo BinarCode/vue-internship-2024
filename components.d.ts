@@ -9,7 +9,6 @@ declare module '@vue/runtime-core' {
     BaseForm: typeof import('./src/components/common/form/BaseForm.vue')['default']
     LoadingIcon: typeof import('./src/components/common/buttons/LoadingIcon.vue')['default']
     Navbar: typeof import('./src/components/navbar/Navbar.vue')['default']
-    NotFound: typeof import('./src/components/NotFound.vue')['default']
     Notification: typeof import('./src/components/common/NotificationPlugin/Notification.vue')['default']
     Notifications: typeof import('./src/components/common/NotificationPlugin/Notifications.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

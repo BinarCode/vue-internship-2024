@@ -19,8 +19,12 @@ export const useAuthStore = defineStore("auth", {
       return localStorage.getItem("token");
     },
     async login(data: LoginModel): Promise<LoginResponse> {
-      const response = await axios.post("/auth/login", data)
+      const response = await axios.post("/auth/login", data);
       return response;
+    },
+    logout(): void {
+      localStorage.removeItem("token");
+      localStorage.removeItem("image");
     },
   },
 });
