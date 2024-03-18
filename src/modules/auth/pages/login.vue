@@ -38,7 +38,7 @@
           }"
         />
 
-        <BaseButton type="submit" variant="form-submit" size="form-submit">{{
+        <BaseButton type="submit" variant="primary" size="xs">{{
           $t("Sign In")
         }}</BaseButton>
       </BaseForm>
@@ -62,12 +62,7 @@ const authStore = useAuthStore();
 
 const login = async (): Promise<void> => {
   try {
-    const { token, image } = await authStore.login(model);
-
-    localStorage.setItem("image", image);
-
-    authStore.setLoggedIn(true);
-    authStore.setToken(token);
+    await authStore.login(model);
 
     router.push("/");
   } catch (error) {
@@ -78,5 +73,7 @@ const login = async (): Promise<void> => {
 
 <route lang="yaml">
 name: Login
-meta: { layout: authLayout, hideNavbar: true }
+meta:
+  layout: authLayout
+  hideNavbar: true
 </route>

@@ -11,6 +11,7 @@ import {
   isUnauthorized,
   mapErrors,
 } from "@/modules/common/utils/requestUtils";
+import i18n from "@/i18n";
 
 export const statusCodesToHandle = [400, 401, 422];
 const TOKEN_KEY = "token";
@@ -59,8 +60,9 @@ export async function errorInterceptor(error: CustomAxiosError) {
   if (statusCodesToHandle.includes(status)) {
     errors = mapErrors(error.response.data);
     if (errors === "Unauthenticated.") {
-      errors =
-        "Your session expired. Please login in again to use the application";
+      errors = i18n.t(
+        "Your session expired. Please login in again to use the application"
+      );
     }
 
     if (notifications.state.length === 0) {
@@ -74,7 +76,7 @@ export async function errorInterceptor(error: CustomAxiosError) {
   }
 
   if (isForbidden(status)) {
-    errors = "You are not allowed to perform this action";
+    errors = i18n.t("You are not allowed to perform this action");
     if (notifications.state.length === 0) {
       notify({
         type: NotificationType.Error,
@@ -86,7 +88,7 @@ export async function errorInterceptor(error: CustomAxiosError) {
   }
 
   if (isInternalServerError(status)) {
-    errors = "A server error occurred during request execution";
+    errors = i18n.t("A server error occurred during request execution");
     if (notifications.state.length === 0) {
       notify({
         type: NotificationType.Error,

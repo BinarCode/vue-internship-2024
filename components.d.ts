@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
     Navbar: typeof import('./src/components/navbar/Navbar.vue')['default']
     Notification: typeof import('./src/components/common/NotificationPlugin/Notification.vue')['default']
     Notifications: typeof import('./src/components/common/NotificationPlugin/Notifications.vue')['default']
+    ProfileDropdown: typeof import('./src/components/dropdowns/ProfileDropdown.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

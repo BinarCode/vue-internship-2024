@@ -1,30 +1,35 @@
 import { LoginModel, LoginResponse } from "@/modules/common/utils/models";
-import axios from "axios";
+import axios, { HeadersDefaults } from "axios";
 import { defineStore } from "pinia";
 
 export const useAuthStore = defineStore("auth", {
   state: () => {
     return {
-      isLoggedIn: false as boolean,
+      profile: {} as LoginResponse,
     };
   },
   actions: {
-    setLoggedIn(isLoggedIn: boolean): void {
-      this.isLoggedIn = isLoggedIn;
-    },
     setToken(token: string): void {
-      localStorage.setItem("token", JSON.stringify(token));
+      localStorage.setItem("token", token);
     },
     getToken(): string | null {
       return localStorage.getItem("token");
     },
     async login(data: LoginModel): Promise<LoginResponse> {
-      const response = await axios.post("/auth/login", data);
-      return response;
+      this.profile = await axios.post("/auth/login", data);
+      this.setToken(this.profile.token);
+
+      return this.profile;
     },
     logout(): void {
-      localStorage.removeItem("token");
-      localStorage.removeItem("image");
+      localStorage.clear();
+    },
+    async getUser(): Promise<LoginResponse> {
+      this.profile = await axios.get("/auth/me", {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+
+      return this.profile;
     },
   },
 });
