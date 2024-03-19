@@ -1,4 +1,5 @@
 import { LoginModel, LoginResponse } from "@/modules/common/utils/models";
+import router from "@/router/router";
 import axios, { HeadersDefaults } from "axios";
 import { defineStore } from "pinia";
 
@@ -20,9 +21,6 @@ export const useAuthStore = defineStore("auth", {
       this.setToken(this.profile.token);
 
       return this.profile;
-    },
-    logout(): void {
-      localStorage.clear();
     },
     async getUser(): Promise<LoginResponse> {
       this.profile = await axios.get("/auth/me", {

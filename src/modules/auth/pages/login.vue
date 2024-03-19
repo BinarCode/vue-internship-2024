@@ -75,5 +75,4 @@ const login = async (): Promise<void> => {
 name: Login
 meta:
   layout: authLayout
-  hideNavbar: true
 </route>

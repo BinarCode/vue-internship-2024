@@ -12,6 +12,7 @@ import {
   mapErrors,
 } from "@/modules/common/utils/requestUtils";
 import i18n from "@/i18n";
+import { logout } from "./utils/authUtils";
 
 export const statusCodesToHandle = [400, 401, 422];
 const TOKEN_KEY = "token";
@@ -59,7 +60,8 @@ export async function errorInterceptor(error: CustomAxiosError) {
 
   if (statusCodesToHandle.includes(status)) {
     errors = mapErrors(error.response.data);
-    if (errors === "Unauthenticated.") {
+    if (errors === "Token Expired!") {
+      logout();
       errors = i18n.t(
         "Your session expired. Please login in again to use the application"
       );
