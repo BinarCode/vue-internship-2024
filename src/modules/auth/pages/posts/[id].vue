@@ -30,8 +30,14 @@
           </a>
         </div>
         <div class="flex items-center mt-2 gap-3">
-          <Edit2Icon @click="postEdit" class="cursor-pointer" />
-          <Trash2Icon @click="postStore.deletePost(postId)" class="cursor-pointer" />
+          <Edit2Icon
+            @click="postStore.editPost(postId)"
+            class="cursor-pointer"
+          />
+          <Trash2Icon
+            @click="postStore.deletePost(postId)"
+            class="cursor-pointer"
+          />
         </div>
       </div>
     </div>
@@ -46,20 +52,14 @@ import { Edit2Icon, Trash2Icon } from "@zhuowenli/vue-feather-icons";
 
 const postStore = usePostStore();
 
-const route = useRoute()
-const postId = computed(() => route.params.id)
+const route = useRoute();
+const postId = computed(() => route.params.id);
 
 const posts = computed(() => postStore.posts);
 
-const post = computed(() => posts.value.find((post) => String(post.id) === String(postId.value)))
-
-const postEdit = async (): Promise<void> => {
-  try {
-    postStore.editPost(postId);
-  } catch (error) {
-    console.error("Error during edit", error);
-  }
-};
+const post = computed(() =>
+  posts.value.find((post) => String(post.id) === String(postId.value))
+);
 </script>
 
 <route lang="yaml">
