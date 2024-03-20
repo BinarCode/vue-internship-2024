@@ -1,8 +1,10 @@
 <template>
-  <div>Posts Component</div>
+    <router-view/>
 </template>
 
-<script lang="ts"></script>
-<route lang="yaml">
-name: Posts
-</route>
+<script lang="ts" setup>
+import { usePostStore } from "@/modules/auth/store/postStore";
+
+const postStore = usePostStore();
+postStore.getAllPosts();
+</script>
