@@ -7,8 +7,6 @@ export const usePostStore = defineStore("post", {
   state: () => {
     return {
       posts: [] as Array<PostModel>,
-      post: {} as PostModel,
-      updated: {} as PostModel,
     };
   },
   actions: {
@@ -21,11 +19,7 @@ export const usePostStore = defineStore("post", {
 
       return response;
     },
-    async getPostById(id: number): Promise<PostModel> {
-      const response = await axios.get(`/posts/${id}`);
-      this.post = response;
-      return response;
-    },
+
     async deletePost(id: number): Promise<PostModel> {
       try {
         const response = await axios.delete(`/posts/${id}`);
@@ -48,11 +42,23 @@ export const usePostStore = defineStore("post", {
         throw error;
       }
     },
-    // WIP, don't mind this for now
-    async editPost(id: number): Promise<PostModel> {
-      const response = await axios.put(`/posts/${id}`);
-      this.updated = response;
-      return response;
+    async editPost(post: PostModel): Promise<PostModel> {
+      try {
+        const response = await axios.put(`/posts/${post.id}`, post, {
+          headers: { "Content-Type": "application/json" },
+        });
+        const index = this.posts.findIndex((p) => p.id === response.id);
+        if (index === -1) {
+          return;
+        }
+
+        this.posts[index] = post;
+
+        return response;
+      } catch (error) {
+        console.error("Error updating post", error);
+        throw error;
+      }
     },
   },
   getters: {
