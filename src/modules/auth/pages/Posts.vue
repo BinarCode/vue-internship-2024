@@ -8,3 +8,7 @@ import { usePostStore } from "@/modules/auth/store/postStore";
 const postStore = usePostStore();
 postStore.getAllPosts();
 </script>
+
+<route lang="yaml">
+name: Posts template
+</route>

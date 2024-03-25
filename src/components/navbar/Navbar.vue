@@ -21,5 +21,5 @@
 </template>
 
 <script lang="ts" setup>
-import ProfileDropdown from "../dropdowns/ProfileDropDown.vue";
+import ProfileDropdown from "@/components/dropdowns/ProfileDropdown.vue";
 </script>
