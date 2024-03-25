@@ -4,7 +4,11 @@
 
 <script lang="ts" setup>
 import { usePostStore } from "@/modules/auth/store/postStore";
+import { ref } from "vue";
+
+const limit = ref(30);
+const page = ref(parseInt(localStorage.getItem('currentPage')) || 1)
 
 const postStore = usePostStore();
-postStore.getAllPosts();
+postStore.getPostsByPagination(page.value,limit.value);
 </script>

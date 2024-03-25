@@ -10,7 +10,9 @@
         v-if="post?.tags.length"
         class="flex flex-wrap justify-end items-center py-3 text-sm text-white font-medium"
       >
-        <Tags v-for="tag in post.tags" :tag="tag" />
+        <Tags 
+          v-for="tag in post.tags" 
+          :tag="tag" />
       </div>
       <div class="mt-2">
         <p class="text-2xl text-indigo-500 font-bold break-words">

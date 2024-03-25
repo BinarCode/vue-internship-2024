@@ -3,12 +3,9 @@
     <div
       class="bg-white w-3/4 h-3/4 md:w-2/3 md:h-2/3 lg:w-3/4 lg:h-3/4 p-6 rounded-lg shadow-lg text-center"
     >
-      <BaseForm 
-        :actions="false" 
-        @submit="onSubmit">
-        
+      <BaseForm :actions="false" @submit="onSubmit()">
         <div class="flex relative items-center justify-center mb-5">
-          <h1 class="font-bold">{{ $t("Edit Post") }}</h1>
+          <h1 class="font-bold">{{ $t("Add Post") }}</h1>
 
           <XIcon
             @click="$emit('close-modal')"
@@ -19,24 +16,23 @@
 
         <div>
           <FormKit
-            v-model="model.title"
+            v-model="newPost.title"
             type="text"
             label="Title"
             validation="required|length:0,50"
           />
           <FormKit
-            v-model="model.body"
+            v-model="newPost.body"
             type="textarea"
             label="Content"
             validation="required|length:0,500"
           />
           <div
-            v-if="model?.tags?.length"
+            v-if="newPost?.tags?.length"
             class="flex flex-wrap justify-center gap-3 items-center mt-5 py-3 text-md"
           >
-            <span 
-              v-for="tag in model?.tags">
-              <Tags :tag="tag"/>
+            <span v-for="tag in newPost?.tags">
+              <Tags :tag="tag" />
               <XIcon @click="removeTag(tag)" class="cursor-pointer" />
             </span>
           </div>
@@ -48,19 +44,12 @@
               type="text"
               validation="length:0,15"
             />
-            <BaseButton     
-              size="xs" 
-              variant="primary"
-              @click="addTag" 
-                >{{ $t("+ Add another") }}
+            <BaseButton @click="addTag" size="xs" variant="primary"
+              >{{ $t("+ Add another") }}
             </BaseButton>
           </div>
-          <BaseButton 
-            size="lg"
-            type="submit" 
-            variant="primary" 
-            >{{
-              $t("Edit Post")
+          <BaseButton type="submit" variant="primary" size="lg">{{
+            $t("Add New Post")
           }}</BaseButton>
         </div>
       </BaseForm>
@@ -77,26 +66,34 @@ import { PostModel } from "@/modules/common/utils/models";
 import { usePostStore } from "@/modules/auth/store/postStore";
 import { cloneDeep } from "lodash-es";
 import { error } from "../common/NotificationPlugin";
-import Tags from "@/components/common/tags/Tags.vue";
+import { useAuthStore } from "@/modules/auth/store/authStore";
+import Tags from "../common/tags/Tags.vue";
 
-
-const { post } = defineProps({
+defineProps({
   post: {
     type: Object as PropType<PostModel>,
-      default: () => ({}),
+    DEFAULT: () => ({}),
   },
 });
 
 const emit = defineEmits(["close-modal"]);
 
-const model = ref(cloneDeep(post));
+const newPost = ref({
+  title: "",
+  body: "",
+  userId: 0,
+  tags: [],
+  reactions: 0,
+});
+
 const postStore = usePostStore();
+const authStore = useAuthStore();
 
 const tagInput = ref<string>("");
 
 function addTag() {
   const newTag = tagInput.value;
-  const sameTag = model.value?.tags.includes(tagInput.value);
+  const sameTag = newPost.value.tags.includes(tagInput.value);
   if (!newTag) {
     error("No tag to add");
     return;
@@ -105,23 +102,23 @@ function addTag() {
     error("Tag exists");
     return;
   }
-  model.value?.tags.push(tagInput.value);
+  newPost.value.tags.push(tagInput.value);
 
   tagInput.value = "";
 }
 
 function removeTag(tag: string) {
-  const index = model.value?.tags.indexOf(tag);
+  const index = newPost.value.tags.indexOf(tag);
   if (index !== -1) {
-    model.value?.tags.splice(index, 1);
+    newPost.value.tags.splice(index, 1);
   }
 }
 
 function onSubmit() {
-  try{
-    postStore.editPost(model.value);
+  try {
+    postStore.addPost(authStore.profile.id, newPost.value);
     emit("close-modal");
-  }catch(err) {
+  } catch (err) {
     console.error("Error during editing", err);
     error("Failed to edit");
   }

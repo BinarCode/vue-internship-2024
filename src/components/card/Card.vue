@@ -40,8 +40,8 @@
 import { PostModel } from "@/modules/common/utils/models";
 import { PropType, computed, ref } from "vue";
 import EditPost from "@/components/modal/EditPost.vue";
-import Tags from "../common/tags/Tags.vue";
-import Author from "../common/author/Author.vue";
+import Tags from "@/components/common/tags/Tags.vue";
+import Author from "@/components/common/author/Author.vue";
 import PostActions from "@/components/common/postActions/PostActions.vue"
 
 const { post } = defineProps({
