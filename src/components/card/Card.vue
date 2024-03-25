@@ -23,12 +23,13 @@
             class="flex flex-wrap justify-starts items-center py-3 border-b-2 text-xs text-white font-medium"
           >
           <Tags 
-            v-for="tag in post.tags" 
-            :tag="tag" />
+            :tags="post?.tags" />
           </div>
           <div class="flex items-center mt-2 justify-between">
             <Author :post="post"/>
-            <PostActions :post="post" />
+            <PostActions 
+              :post="post" 
+              size="1x"/>
           </div>
         </div>
       </router-link>
