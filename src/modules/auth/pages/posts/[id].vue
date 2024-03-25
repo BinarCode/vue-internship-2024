@@ -10,7 +10,7 @@
         v-if="post?.tags.length"
         class="flex flex-wrap justify-end items-center py-3 text-sm text-white font-medium"
       >
-        <Tags v-for="tag in post.tags" :tag="tag" />
+        <Tags :tags="post.tags" />
       </div>
       <div class="mt-2">
         <p class="text-2xl text-indigo-500 font-bold break-words">
@@ -22,7 +22,11 @@
       </div>
       <div class="flex items-center justify-between mt-4 gap-10">
         <Author :post="post" />
-        <PostActions :post="post" />
+        <PostActions
+           :post="post" 
+           size="2x"
+           @open-modal="isModalOpen = true"
+           />
       </div>
     </div>
   </div>
@@ -77,10 +81,10 @@ const post = computed(() =>
   posts.value.find((post) => String(post.id) === String(postId.value))
 );
 
-postStore.getComments(post.value);
+// postStore.getComments(post.value);
 
-const comments = computed(() => postStore.comments.data);
-const totalComments = computed(() => postStore.totalComments);
+// const comments = computed(() => postStore.comments.data);
+// const totalComments = computed(() => postStore.totalComments);
 
 const isModalOpen = ref(false);
 </script>

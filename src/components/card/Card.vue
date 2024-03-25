@@ -4,6 +4,7 @@
       v-if="isModalOpen"
       :post="post"
       @close-modal="isModalOpen = false"
+      @open-modal="isModalOpen = true"
     />
     <div
       class="overflow-hidden shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-90 w-60 md:w-80 cursor-pointer"
@@ -23,12 +24,13 @@
             class="flex flex-wrap justify-starts items-center py-3 border-b-2 text-xs text-white font-medium"
           >
           <Tags 
-            v-for="tag in post.tags" 
-            :tag="tag" />
+            :tags="post?.tags" />
           </div>
           <div class="flex items-center mt-2 justify-between">
             <Author :post="post"/>
-            <PostActions :post="post" />
+            <PostActions 
+              :post="post" 
+              size="1x"/>
           </div>
         </div>
       </router-link>

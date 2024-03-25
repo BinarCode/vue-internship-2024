@@ -1,16 +1,22 @@
 <template>
-    <span class="px-2 py-1 font-bold m-1 rounded bg-indigo-500">
-        #{{ tag }}
-    </span>
+  <div
+    v-for="tag in tags"
+    :key="tag"
+    class="flex"  
+  >
+    <Tag :tag="tag"/>
+  </div> 
 </template>
 
 <script setup lang="ts">
+import Tag from "@/components/common/tags/Tag.vue"
+import { PropType } from "vue";
 
 
-defineProps({
-  tag: {
-    type: String,
-    default: '',
+const {tags} =defineProps({
+  tags: {
+    type: Array as PropType<string[]>,
+    default: () => [],
   },
 });
 

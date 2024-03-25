@@ -96,11 +96,11 @@ const tagInput = ref<string>("");
 
 function addTag() {
   const newTag = tagInput.value;
-  const sameTag = model.value?.tags.includes(tagInput.value);
   if (!newTag) {
     error("No tag to add");
     return;
   }
+  const sameTag = model.value?.tags.includes(tagInput.value);
   if (sameTag) {
     error("Tag exists");
     return;
@@ -109,6 +109,7 @@ function addTag() {
 
   tagInput.value = "";
 }
+
 
 function removeTag(tag: string) {
   const index = model.value?.tags.indexOf(tag);
