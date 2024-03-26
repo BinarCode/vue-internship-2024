@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center mt-2 gap-3 ml-5">
+  <div :key="userId" class="flex items-center mt-2 gap-3 ml-5">
     <Reactions 
       :post="post" 
       :size="size" />

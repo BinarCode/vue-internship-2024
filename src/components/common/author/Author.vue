@@ -42,11 +42,11 @@ const { post } = defineProps({
 
 const authStore = useAuthStore();
 
-const userId = computed(() => authStore.profile.id);
-const userImage = computed(() => authStore.profile.image);
-const currentUser = computed(() => userId.value === post.userId);
+const userId = computed(() => authStore.profile?.id);
+const userImage = computed(() => authStore.profile?.image);
+const currentUser = computed(() => userId.value === post?.userId);
 
-const profileName = computed(() => authStore.profile.firstName + ' ' + authStore.profile.lastName)
+const profileName = computed(() => authStore.profile?.firstName + ' ' + authStore.profile?.lastName)
 
 
 

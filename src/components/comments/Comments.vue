@@ -1,5 +1,5 @@
 <template>
-     <div class="antialiased mx-auto max-w-screen-sm ">
+  <div class="antialiased mx-auto max-w-screen-sm ">
     <h3 class="mb-4 text-lg font-semibold text-gray-900">
       {{ $t("Comments") }} ({{ totalComments }})
     </h3>
@@ -15,8 +15,8 @@
         :key="comment.id"
         :comment="comment"
         class="space-y-4"
-        />
-    </div>
+      />
+  </div>
 </template>
 
 <script setup lang="ts">
