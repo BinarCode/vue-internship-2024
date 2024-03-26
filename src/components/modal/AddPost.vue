@@ -3,38 +3,39 @@
     <div
       class="bg-white w-3/4 h-3/4 md:w-2/3 md:h-2/3 lg:w-3/4 lg:h-3/4 p-6 rounded-lg shadow-lg text-center"
     >
-      <BaseForm :actions="false" @submit="onSubmit()">
-        <div class="flex relative items-center justify-center mb-5">
-          <h1 class="font-bold">{{ $t("Add Post") }}</h1>
+      <BaseForm 
+        :actions="false" 
+        @submit="onSubmit()">
+          <div class="flex relative items-center justify-center mb-5">
+            <h1 class="font-bold">{{ $t("Add Post") }}</h1>
 
-          <XIcon
-            @click="$emit('close-modal')"
-            size="2.5x"
-            class="cursor-pointer absolute right-2"
-          />
-        </div>
+            <XIcon
+              size="2.5x"
+              class="cursor-pointer absolute right-2"
+              @click="$emit('close-modal')"
+            />
+          </div>
 
-        <div>
-          <FormKit
-            v-model="newPost.title"
-            type="text"
-            label="Title"
-            validation="required|length:0,50"
-          />
-          <FormKit
-            v-model="newPost.body"
-            type="textarea"
-            label="Content"
-            validation="required|length:0,500"
-          />
+          <div>
+            <FormKit
+              v-model="newPost.title"
+              type="text"
+              label="Title"
+              validation="required|length:0,50"
+            />
+            <FormKit
+              v-model="newPost.body"
+              type="textarea"
+              label="Content"
+              validation="required|length:0,500"
+            />
           <div
             v-if="newPost?.tags?.length"
             class="flex flex-wrap justify-center gap-3 items-center mt-5 py-3 text-md"
           >
-            <span v-for="tag in newPost?.tags">
-              <Tags :tag="tag" />
-              <XIcon @click="removeTag(tag)" class="cursor-pointer" />
-            </span>
+            <Tags 
+            :tags="newPost.tags"
+            :isClearable="true" />
           </div>
           <div class="grid justify-center mt-5 mb-20">
             <FormKit
@@ -44,12 +45,18 @@
               type="text"
               validation="length:0,15"
             />
-            <BaseButton @click="addTag" size="xs" variant="primary"
-              >{{ $t("+ Add another") }}
+            <BaseButton  
+              size="xs" 
+              variant="primary"
+              @click="addTag"
+                >{{ $t("+ Add another") }}
             </BaseButton>
           </div>
-          <BaseButton type="submit" variant="primary" size="lg">{{
-            $t("Add New Post")
+          <BaseButton 
+            type="submit" 
+            variant="primary" 
+            size="lg">{{
+              $t("Add New Post")
           }}</BaseButton>
         </div>
       </BaseForm>
@@ -64,7 +71,6 @@ import { PropType, ref } from "vue";
 import BaseButton from "../common/buttons/BaseButton.vue";
 import { PostModel } from "@/modules/common/utils/models";
 import { usePostStore } from "@/modules/auth/store/postStore";
-import { cloneDeep } from "lodash-es";
 import { error } from "../common/NotificationPlugin";
 import { useAuthStore } from "@/modules/auth/store/authStore";
 import Tags from "../common/tags/Tags.vue";
@@ -93,11 +99,11 @@ const tagInput = ref<string>("");
 
 function addTag() {
   const newTag = tagInput.value;
-  const sameTag = newPost.value.tags.includes(tagInput.value);
   if (!newTag) {
     error("No tag to add");
     return;
   }
+  const sameTag = newPost.value.tags.includes(tagInput.value);
   if (sameTag) {
     error("Tag exists");
     return;

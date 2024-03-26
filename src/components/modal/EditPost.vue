@@ -11,9 +11,9 @@
           <h1 class="font-bold">{{ $t("Edit Post") }}</h1>
 
           <XIcon
-            @click="$emit('close-modal')"
             size="2.5x"
             class="cursor-pointer absolute right-2"
+            @click="$emit('close-modal')"
           />
         </div>
 
@@ -34,11 +34,9 @@
             v-if="model?.tags?.length"
             class="flex flex-wrap justify-center gap-3 items-center mt-5 py-3 text-md"
           >
-            <span 
-              v-for="tag in model?.tags">
-              <Tags :tag="tag"/>
-              <XIcon @click="removeTag(tag)" class="cursor-pointer" />
-            </span>
+              <Tags 
+                :tags="model.tags"
+                :isClearable="true"/>
           </div>
           <div class="grid justify-center mt-5 mb-20">
             <FormKit

@@ -4,7 +4,9 @@
     :key="tag"
     class="flex"  
   >
-    <Tag :tag="tag"/>
+    <Tag 
+    :tag="tag"
+    :isClearable="isClearable"/>
   </div> 
 </template>
 
@@ -13,11 +15,15 @@ import Tag from "@/components/common/tags/Tag.vue"
 import { PropType } from "vue";
 
 
-const {tags} =defineProps({
+const {tags, isClearable} =defineProps({
   tags: {
     type: Array as PropType<string[]>,
     default: () => [],
   },
+  isClearable: {
+    type: Boolean,
+    default: false
+  }
 });
 
 </script>

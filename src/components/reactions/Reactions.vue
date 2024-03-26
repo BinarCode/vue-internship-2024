@@ -4,11 +4,11 @@
       {{ post?.reactions }}
     </p>
     <HeartIcon
-      @click.prevent="postStore.handleReactions(post)"
       :size="size"
       :key="post?.reactions + post?.reactedByMe"
       class="cursor-pointer"
       :class="{ 'text-red-500 fill-red-500': post?.reactedByMe }"
+      @click.prevent="postStore.handleReactions(post)"
     />
   </div>
 </template>

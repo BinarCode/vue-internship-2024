@@ -1,28 +1,31 @@
 <template>
-  <div class="flex justify-end mt-5 mr-5">
-    <BaseButton @click="isModalOpen = true" size="md" variant="third"
-      >{{ $t("+ Add Post") }}
-    </BaseButton>
-  <div class="flex flex-wrap gap-10 justify-center mt-10">
-    <Card v-for="post in visiblePosts" :key="post.id" :post="post" />
-  </div>
-  <div class="flex flex-wrap gap-x-10 gap-y-20 justify-center mt-10 mb-10">
-    <AddPost
-      v-if="isModalOpen"
-      :post="post"
-      @close-modal="isModalOpen = false"
+  <div class="flex flex-col">
+    <div class="flex justify-end mt-5 mr-5">
+      <BaseButton
+       size="md"
+       variant="third"
+       @click="isModalOpen = true"
+        >{{ $t("+ Add Post") }}
+      </BaseButton>
+    </div>
+    <div class="flex flex-wrap gap-10 justify-center mt-10">
+      <Card 
+        v-for="post in visiblePosts" 
+        :key="post.id" 
+        :post="post" />
+    </div>
+    <div class="flex flex-wrap gap-x-10 gap-y-20 justify-center mt-10 mb-10">
+      <AddPost
+        v-if="isModalOpen"
+        :post="post"
+        @close-modal="isModalOpen = false"
+      />
+    </div>
+    <Pagination 
+      :limit="limit" 
+      :total-posts="totalPosts"
     />
-
-    <Card 
-      v-for="post in visiblePosts"
-      :key="post.id" 
-      :post="post" />
   </div>
-  <Pagination 
-    :limit="limit" 
-    :total-posts="totalPosts" />
-</div>
-
 </template>
 
 <script lang="ts" setup>
@@ -42,6 +45,7 @@ defineProps({
 });
 
 const postStore = usePostStore();
+
 const visiblePosts = computed(() => postStore.visiblePosts);
 const limit = computed(() => postStore.limitPosts);
 const totalPosts = computed(() => postStore.totalPosts);
