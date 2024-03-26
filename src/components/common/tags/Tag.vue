@@ -4,8 +4,8 @@
       <XIcon 
       v-if="isClearable" 
       class="cursor-pointer" 
-      :isClearable="isClearable"
-      @click="removeTag" />
+      :is-clearable="isClearable"
+      @click="$emit('remove-tag')" />
     </div>
 </template>
 
@@ -25,7 +25,5 @@ import { XIcon } from "@zhuowenli/vue-feather-icons";
 
 const emit = defineEmits(["remove-tag"]);
 
-const removeTag = () => {
-  emit("remove-tag");
-}
+
 </script>

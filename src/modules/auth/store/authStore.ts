@@ -1,6 +1,5 @@
 import { LoginModel, LoginResponse } from "@/modules/common/utils/models";
-import router from "@/router/router";
-import axios, { HeadersDefaults } from "axios";
+import axios from "axios";
 import { defineStore } from "pinia";
 
 export const useAuthStore = defineStore("auth", {

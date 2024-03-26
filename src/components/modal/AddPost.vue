@@ -5,7 +5,7 @@
     >
       <BaseForm 
         :actions="false" 
-        @submit="onSubmit()">
+        @submit="onSubmit">
           <div class="flex relative items-center justify-center mb-5">
             <h1 class="font-bold">{{ $t("Add Post") }}</h1>
 
@@ -29,36 +29,33 @@
               label="Content"
               validation="required|length:0,500"
             />
-          <div
-            v-if="newPost?.tags?.length"
-            class="flex flex-wrap justify-center gap-3 items-center mt-5 py-3 text-md"
-          >
             <Tags 
-            :tags="newPost.tags"
-            :isClearable="true" />
-          </div>
-          <div class="grid justify-center mt-5 mb-20">
-            <FormKit
-              v-model="tagInput"
-              :name="$t('Tag')"
-              label="Add Tag"
-              type="text"
-              validation="length:0,15"
+              v-if="newPost?.tags?.length"
+              :tags="newPost.tags"
+              :isClearable="true"
+              class="justify-center"
+              @remove-tag="removeTag"
             />
-            <BaseButton  
-              size="xs" 
-              variant="primary"
-              @click="addTag"
-                >{{ $t("+ Add another") }}
-            </BaseButton>
+            <div class="grid justify-center mt-5 mb-20">
+              <FormKit
+                v-model="tagInput"
+                :name="$t('Tag')"
+                label="Add Tag"
+                type="text"
+                validation="length:0,15"
+              />
+              <BaseButton  
+                size="xs" 
+                @click="addTag"
+                  >{{ $t("+ Add another") }}
+              </BaseButton>
+            </div>
+            <BaseButton 
+              type="submit" 
+              size="lg">{{
+                $t("Add New Post")
+            }}</BaseButton>
           </div>
-          <BaseButton 
-            type="submit" 
-            variant="primary" 
-            size="lg">{{
-              $t("Add New Post")
-          }}</BaseButton>
-        </div>
       </BaseForm>
     </div>
   </div>
@@ -67,20 +64,12 @@
 <script setup lang="ts">
 import BaseForm from "@/components/common/form/BaseForm.vue";
 import { XIcon } from "@zhuowenli/vue-feather-icons";
-import { PropType, ref } from "vue";
 import BaseButton from "../common/buttons/BaseButton.vue";
-import { PostModel } from "@/modules/common/utils/models";
 import { usePostStore } from "@/modules/auth/store/postStore";
 import { error } from "../common/NotificationPlugin";
 import { useAuthStore } from "@/modules/auth/store/authStore";
 import Tags from "../common/tags/Tags.vue";
 
-defineProps({
-  post: {
-    type: Object as PropType<PostModel>,
-    DEFAULT: () => ({}),
-  },
-});
 
 const emit = defineEmits(["close-modal"]);
 

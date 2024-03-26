@@ -29,15 +29,14 @@
             type="textarea"
             label="Content"
             validation="required|length:0,500"
-          />
-          <div
+          />         
+          <Tags 
             v-if="model?.tags?.length"
-            class="flex flex-wrap justify-center gap-3 items-center mt-5 py-3 text-md"
-          >
-              <Tags 
-                :tags="model.tags"
-                :isClearable="true"/>
-          </div>
+            :tags="model.tags"
+            :isClearable="true"
+            class="justify-center"
+            @remove-tag="removeTag"
+          />         
           <div class="grid justify-center mt-5 mb-20">
             <FormKit
               v-model="tagInput"
@@ -48,7 +47,6 @@
             />
             <BaseButton     
               size="xs" 
-              variant="primary"
               @click="addTag" 
                 >{{ $t("+ Add another") }}
             </BaseButton>
@@ -56,7 +54,6 @@
           <BaseButton 
             size="lg"
             type="submit" 
-            variant="primary" 
             >{{
               $t("Edit Post")
           }}</BaseButton>

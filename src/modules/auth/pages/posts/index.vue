@@ -2,7 +2,6 @@
   <div class="flex flex-col">
     <div class="flex justify-end mt-5 mr-5">
       <BaseButton
-       size="md"
        variant="third"
        @click="isModalOpen = true"
         >{{ $t("+ Add Post") }}
@@ -17,7 +16,6 @@
     <div class="flex flex-wrap gap-x-10 gap-y-20 justify-center mt-10 mb-10">
       <AddPost
         v-if="isModalOpen"
-        :post="post"
         @close-modal="isModalOpen = false"
       />
     </div>

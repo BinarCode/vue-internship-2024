@@ -19,11 +19,11 @@
               {{ post?.body }}
             </p>
           </div>
-          <div
-            class="flex flex-wrap justify-starts items-center py-3 border-b-2 text-xs text-white font-medium"
-          >
-            <Tags :tags="post?.tags" />
-          </div>
+            <Tags 
+              v-if="post?.tags?.length"
+              :tags="post?.tags"
+              class="justify-end"
+            />  
           <div class="flex items-center mt-2 justify-between">
             <Author :post="post" />
             <PostActions 
