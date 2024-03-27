@@ -1,33 +1,30 @@
 <template>
-  <div class="flex items-center mt-2 gap-3 ml-5">
-    <!-- <Reactions 
+  <div :key="userId" class="flex items-center mt-2 gap-3 ml-5">
+    <Reactions 
       :post="post" 
-      :size="size" /> -->
-    <Edit2Icon 
+      :size="size" />
+    <Edit2Icon
       v-if="currentUser"
       :size="size"
       class="cursor-pointer"
-      @click="$emit('open-modal')" 
-      />
-      
+      @click="$emit('open-modal')"
+    />
     <Trash2Icon
       v-if="currentUser"
       :size="size"
       class="cursor-pointer"
-      @click="postStore.deletePost(post.id)"
+      @click="postStore.deletePost(post)"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import { Edit2Icon, Trash2Icon } from '@zhuowenli/vue-feather-icons';
+import { Edit2Icon, Trash2Icon } from "@zhuowenli/vue-feather-icons";
 import { PostModel } from "@/modules/common/utils/models";
-import { PropType, ref, computed } from 'vue';
-import { usePostStore } from '@/modules/auth/store/postStore';
+import { PropType, computed } from "vue";
+import { usePostStore } from "@/modules/auth/store/postStore";
 import { useAuthStore } from "@/modules/auth/store/authStore";
-// import Reactions from '@/components/reactions/Reactions.vue';
-
-
+import Reactions from "@/components/reactions/Reactions.vue";
 
 const { post, size } = defineProps({
   post: {
@@ -36,17 +33,16 @@ const { post, size } = defineProps({
   },
   size: {
     type: String,
-    default: ''
-  }
+    default: "",
+  },
 });
 
 const postStore = usePostStore();
 
 const authStore = useAuthStore();
 
-
 const userId = computed(() => authStore?.profile?.id);
 const currentUser = computed(() => userId.value === post?.userId);
 
-defineEmits(["open-modal"])
+defineEmits(["open-modal"]);
 </script>

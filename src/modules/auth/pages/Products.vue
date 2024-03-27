@@ -1,8 +1,9 @@
 <template>
-  <div>Products Component</div>
+  <router-view />
 </template>
 
 <script lang="ts"></script>
+
 <route lang="yaml">
-name: Products
+name: Products template
 </route>

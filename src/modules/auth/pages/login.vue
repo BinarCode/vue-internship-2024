@@ -38,8 +38,10 @@
           }"
         />
 
-        <BaseButton type="submit" variant="primary" size="xs">{{
-          $t("Sign In")
+        <BaseButton 
+          type="submit"  
+          size="xs">{{
+            $t("Sign In")
         }}</BaseButton>
       </BaseForm>
     </div>

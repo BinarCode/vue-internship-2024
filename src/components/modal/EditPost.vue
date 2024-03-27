@@ -11,9 +11,9 @@
           <h1 class="font-bold">{{ $t("Edit Post") }}</h1>
 
           <XIcon
-            @click="$emit('close-modal')"
             size="2.5x"
             class="cursor-pointer absolute right-2"
+            @click="$emit('close-modal')"
           />
         </div>
 
@@ -29,19 +29,14 @@
             type="textarea"
             label="Content"
             validation="required|length:0,500"
-          />
-          <div
+          />         
+          <Tags 
             v-if="model?.tags?.length"
-            class="flex flex-wrap justify-center gap-3 items-center mt-5 py-3 text-md"
-          >
-            <span
-              v-for="tag in model?.tags"
-              class="px-2 py-1 bg-indigo-500 text-white font-bold rounded flex items-center gap-1"
-            >
-              #{{ tag }}
-              <XIcon @click="removeTag(tag)" class="cursor-pointer" />
-            </span>
-          </div>
+            :tags="model.tags"
+            :isClearable="true"
+            class="justify-center"
+            @remove-tag="removeTag"
+          />         
           <div class="grid justify-center mt-5 mb-20">
             <FormKit
               v-model="tagInput"
@@ -52,7 +47,6 @@
             />
             <BaseButton     
               size="xs" 
-              variant="primary"
               @click="addTag" 
                 >{{ $t("+ Add another") }}
             </BaseButton>
@@ -60,7 +54,6 @@
           <BaseButton 
             size="lg"
             type="submit" 
-            variant="primary" 
             >{{
               $t("Edit Post")
           }}</BaseButton>
@@ -79,6 +72,8 @@ import { PostModel } from "@/modules/common/utils/models";
 import { usePostStore } from "@/modules/auth/store/postStore";
 import { cloneDeep } from "lodash-es";
 import { error } from "../common/NotificationPlugin";
+import Tags from "@/components/common/tags/Tags.vue";
+
 
 const { post } = defineProps({
   post: {
@@ -109,7 +104,6 @@ function addTag() {
 
   tagInput.value = "";
 }
-
 
 function removeTag(tag: string) {
   const index = model.value?.tags.indexOf(tag);

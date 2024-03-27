@@ -53,7 +53,7 @@ const toggleMenu = () => {
 };
 
 const authStore = useAuthStore();
-const userImage = computed(() => authStore.profile.image);
+const userImage = computed(() => authStore.profile?.image);
 const initials = computed(() => {
   const { profile } = authStore;
   if (!authStore.profile?.id) {

@@ -4,11 +4,13 @@
     ref="button"
     :type="type"
     :disabled="disabled || loading"
-    class="flex w-full justify-center rounded-md font-semibold"
+    class="flex justify-center rounded-md font-semibold"
     :class="{
-      'text-white bg-indigo-600 hover:bg-indigo-500 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600':
+      'text-white w-full bg-indigo-600 hover:bg-indigo-500 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600':
         variant === 'primary',
       'block text-gray-700': variant === 'secondary',
+      'text-white bg-indigo-600 hover:bg-indigo-500 shadow-sm':
+        variant === 'third',
       'text-xs px-3 py-1.5 leading-6': size === 'xs',
       'text-sm px-4 py-2 leading-4': size === 'sm',
       'text-sm px-5 py-2 leading-5': size === 'md',
