@@ -44,8 +44,8 @@
 <script setup lang="ts">
 import { get } from "lodash-es";
 import { computed, ref } from "vue";
-import { useAuthStore } from "../../modules/auth/store/authStore";
-import { logout } from "../../modules/common/utils/authUtils";
+import { useAuthStore } from "@/modules/auth/store/authStore";
+import { logout } from "@/modules/common/utils/authUtils";
 
 const isMenuOpen = ref(false);
 const toggleMenu = () => {

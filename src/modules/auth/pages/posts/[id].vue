@@ -1,5 +1,6 @@
 <template>
-  <div class="mt-10 flex justify-center">
+  <div>
+    <div class="mt-10 flex justify-center">
     <EditPost
       v-if="isModalOpen"
       :post="post"
@@ -28,6 +29,7 @@
     </div>
   </div>
   <Comments />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -52,8 +54,7 @@ const post = computed(
     posts.value.find((post) => String(post?.id) === String(postId.value)) || {}
 );
 
-watch(
-  post,
+watch(() => post.value.id,
   (newPost) => {
     if (newPost)
     postStore.getComments(post.value);

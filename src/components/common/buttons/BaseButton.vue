@@ -11,6 +11,13 @@
       'block text-gray-700': variant === 'secondary',
       'text-white bg-indigo-600 hover:bg-indigo-500 shadow-sm':
         variant === 'third',
+      'relative z-10 inline-flex items-center px-4 py-2 text-sm focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600':
+        variant === 'paginationNumber',
+      'relative inline-flex items-center rounded-r-md px-2 py-2':
+        variant === 'paignationArrow',
+      'relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50': variant === '1',
+
+
       'text-xs px-3 py-1.5 leading-6': size === 'xs',
       'text-sm px-4 py-2 leading-4': size === 'sm',
       'text-sm px-5 py-2 leading-5': size === 'md',
