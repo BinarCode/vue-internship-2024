@@ -40,9 +40,10 @@
 
         <BaseButton 
           type="submit"  
-          size="xs">{{
-            $t("Sign In")
-        }}</BaseButton>
+          size="xs"
+        >
+          {{ $t("Sign In") }}
+        </BaseButton>
       </BaseForm>
     </div>
   </div>

@@ -6,7 +6,9 @@
       :post="post"
       @close-modal="isModalOpen = false"
     />
-    <div class="max-w-4xl px-10 my-4 py-6 bg-white rounded-lg shadow-md">
+    <div 
+      :key="postKey"
+      class="max-w-4xl px-10 my-4 py-6 bg-white rounded-lg shadow-md">
       <Tags 
         v-if="post?.tags?.length" 
         :tags="post?.tags" 
@@ -53,6 +55,8 @@ const post = computed(
   () =>
     posts.value.find((post) => String(post?.id) === String(postId.value)) || {}
 );
+
+const postKey = computed(() => post.value.id + (post.value?.editedKey || 0))
 
 watch(() => post.value.id,
   (newPost) => {

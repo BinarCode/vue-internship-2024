@@ -16,5 +16,5 @@
 <script setup lang="ts">
 import { XIcon } from "@zhuowenli/vue-feather-icons";
 
-const emit = defineEmits(["close-modal", "on-submit"]);
+const emit = defineEmits(["close-modal"]);
 </script>

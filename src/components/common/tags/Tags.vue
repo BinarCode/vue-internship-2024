@@ -1,15 +1,13 @@
 <template>
   <div>
   <div class="flex flex-wrap justify-center items-center py-3 text-sm text-white font-medium">
-    <div class="flex">
       <Tag
-        v-for="tag in tags"
+        v-for="tag in currentTags"
         :key="tag"
         :tag="tag"
         :is-clearable="isClearable"
         @remove-tag="removeTag(tag)"
       />
-    </div>
   </div>
   <div 
     v-if="canAdd"
@@ -30,7 +28,7 @@
 
 <script setup lang="ts">
 import Tag from "@/components/common/tags/Tag.vue";
-import { PropType, ref } from "vue";
+import { PropType, computed, ref, watch } from "vue";
 import { error } from "../NotificationPlugin";
 
 const {canAdd, tags, isClearable } = defineProps({
@@ -51,31 +49,37 @@ const {canAdd, tags, isClearable } = defineProps({
 
 const tagInput = ref<string>("");
 
+const emit = defineEmits(["updateTags"]);
+
+const currentTags = computed({
+  get() {    
+    return tags;
+  },
+  set(newValue) {
+    emit("updateTags", newValue);
+  },
+});
+
 function addTag() {
   const newTag = tagInput.value;
   if (!newTag) {
     error("No tag to add");
     return;
   }
-  const sameTag = tags.includes(tagInput.value);
+  const sameTag = currentTags.value.includes(tagInput.value);
   if (sameTag) {
     error("Tag exists");
     return;
   }
-  tags.push(tagInput.value);
+  currentTags.value.push(tagInput.value);
 
   tagInput.value = "";
 }
 
 function removeTag(tag: string) {
-  console.log("am sters teoretic");
-  
-  
-  const index = tags.indexOf(tag);
-  
+  const index = currentTags.value.indexOf(tag); 
   if (index !== -1) {
-    tags.splice(index, 1);
-    
+    currentTags.value.splice(index, 1);
   }
 }
 

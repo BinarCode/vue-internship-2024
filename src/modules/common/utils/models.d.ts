@@ -32,6 +32,7 @@ export interface PostModel {
   deletedOn?: string;
   reactedByMe?: Boolean;
   isCreated?: Boolean;
+  editedKey?: number;
 }
 
 export interface CommentsResponseModel {
