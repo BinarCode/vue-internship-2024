@@ -1,7 +1,7 @@
 <template>
   <BaseForm 
     :actions="false"
-    @submit="$emit('on-submit')">
+    @submit="$emit('submit')">
       <div class="flex items-center justify-center mb-5">
         <h1 class="font-bold">{{ $t(title) }}</h1>
       </div>
@@ -56,7 +56,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["updatePost", "on-submit"]);
+const emit = defineEmits(["updatePost", "submit"]);
 
 const currentPost = computed({
   get() {    

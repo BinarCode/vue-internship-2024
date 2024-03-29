@@ -5,8 +5,8 @@
     <PostForm
       v-model:post="model"
       title="Edit Post"
-      actionLabel="Edit Post"
-      @on-submit="onSubmit"
+      action-label="Edit Post"
+      @submit="onSubmit"
     />
   </BaseModal>
 </template>
