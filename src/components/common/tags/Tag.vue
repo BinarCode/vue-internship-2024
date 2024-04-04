@@ -1,11 +1,12 @@
 <template>
-  <span :tag="tag"  class="px-2 py-1 font-bold m-1 rounded bg-indigo-500">
-    #{{ tag }}
-    <XIcon 
+    <div :tag="tag"  class="flex justify-between items-center gap-1 px-2 py-1 font-bold m-1 rounded bg-indigo-500 text-white">
+      #{{ tag }}
+      <XIcon 
       v-if="isClearable" 
       class="cursor-pointer" 
-      @click="removeTag" />
-  </span>
+      :is-clearable="isClearable"
+      @click="$emit('remove-tag')" />
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -24,7 +25,5 @@ import { XIcon } from "@zhuowenli/vue-feather-icons";
 
 const emit = defineEmits(["remove-tag"]);
 
-const removeTag = () => {
-  emit("remove-tag");
-}
+
 </script>

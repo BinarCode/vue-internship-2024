@@ -30,4 +30,31 @@ export interface PostModel {
   reactions: number;
   isDeleted?: boolean;
   deletedOn?: string;
+  reactedByMe?: Boolean;
+  isCreated?: Boolean;
+  editedKey?: number;
+}
+
+export interface CommentsResponseModel {
+  comments: Array<CommentsModel>;
+  total: number;
+  skip: number;
+  limit: number;
+}
+
+export interface CommentsModel {
+  id: number;
+  body: string;
+  postId: number;
+  user: Object<UserCommentModel>;
+}
+
+export interface UserCommentModel {
+  id: number;
+  username: string;
+}
+
+export interface PostCommentsModel {
+  postId: number;
+  data: Array<CommentsModel>
 }

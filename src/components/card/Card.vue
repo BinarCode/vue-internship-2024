@@ -4,7 +4,6 @@
       v-if="isModalOpen"
       :post="post"
       @close-modal="isModalOpen = false"
-      @open-modal="isModalOpen = true"
     />
     <div
       class="overflow-hidden shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-90 w-60 md:w-80 cursor-pointer"
@@ -20,17 +19,18 @@
               {{ post?.body }}
             </p>
           </div>
-          <div
-            class="flex flex-wrap justify-starts items-center py-3 border-b-2 text-xs text-white font-medium"
-          >
-          <Tags 
-            :tags="post?.tags" />
-          </div>
+            <Tags 
+              v-if="post?.tags?.length"
+              :tags="post?.tags"
+              class="justify-end"
+            />  
           <div class="flex items-center mt-2 justify-between">
-            <Author :post="post"/>
+            <Author :post="post" />
             <PostActions 
-              :post="post" 
-              size="1x"/>
+            :post="post"
+            size="1x"
+            @open-modal="isModalOpen = true"
+            @click.prevent/>
           </div>
         </div>
       </router-link>
@@ -42,9 +42,9 @@
 import { PostModel } from "@/modules/common/utils/models";
 import { PropType, computed, ref } from "vue";
 import EditPost from "@/components/modal/EditPost.vue";
-import Tags from "../common/tags/Tags.vue";
-import Author from "../common/author/Author.vue";
-import PostActions from "@/components/common/postActions/PostActions.vue"
+import Tags from "@/components/common/tags/Tags.vue";
+import Author from "@/components/common/author/Author.vue";
+import PostActions from "@/components/common/postActions/PostActions.vue";
 
 const { post } = defineProps({
   post: {
@@ -54,8 +54,6 @@ const { post } = defineProps({
 });
 
 const link = computed(() => `/posts/${post?.id}`);
-
-
 
 const isModalOpen = ref(false);
 </script>
