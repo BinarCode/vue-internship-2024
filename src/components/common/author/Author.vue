@@ -32,7 +32,6 @@ import { useAuthStore } from "@/modules/auth/store/authStore";
 import { PropType, computed } from "vue";
 import { PostModel } from "@/modules/common/utils/models";
 
-
 const { post } = defineProps({
   post: {
     type: Object as PropType<PostModel>,

@@ -40,18 +40,18 @@
 
         <BaseButton 
           type="submit"  
-          size="xs">{{
-            $t("Sign In")
-        }}</BaseButton>
+          size="xs"
+        >
+          {{ $t("Sign In") }}
+        </BaseButton>
       </BaseForm>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
 import { reactive } from "vue";
-import { error } from "@/components/common/NotificationPlugin";
-import router from "../../../router/router";
-import { useAuthStore } from "../store/authStore";
+import router from "@/router/router";
+import { useAuthStore } from "@/modules/auth/store/authStore";
 import { LoginModel } from "@/modules/common/utils/models";
 import BaseButton from "@/components/common/buttons/BaseButton.vue";
 

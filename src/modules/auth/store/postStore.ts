@@ -49,6 +49,7 @@ export const usePostStore = defineStore("post", {
       try {
         if (post.isCreated) {
           const index = this.posts.findIndex((p) => p.id === post.id);
+          post.editedKey = post.editedKey ? post.editedKey + 1 : 1
           this.posts[index] = post;
           return;
         }
@@ -58,8 +59,9 @@ export const usePostStore = defineStore("post", {
           return;
         }
 
+        post.editedKey = post.editedKey ? post.editedKey + 1 : 1
         this.posts[index] = post;
-
+        
         return response;
       } catch (error) {
         console.error("Error updating post", error);
