@@ -5,24 +5,24 @@
     >
       <BaseForm 
         :actions="false" 
-        @submit="onSubmit">
-          <div class="flex relative items-center justify-center mb-5">
-            <h1 class="font-bold">{{ $t("Add Post") }}</h1>
+        @submit="onSubmit"
+      >
+        <div class="flex relative items-center justify-center mb-5">
+          <h1 class="font-bold">{{ $t("Add Post") }}</h1>
+          <XIcon
+            size="2.5x"
+            class="cursor-pointer absolute right-2"
+            @click="$emit('close-modal')"
+          />
+        </div>
 
-            <XIcon
-              size="2.5x"
-              class="cursor-pointer absolute right-2"
-              @click="$emit('close-modal')"
-            />
-          </div>
-
-          <div>
-            <FormKit
-              v-model="newPost.title"
-              type="text"
-              label="Title"
-              validation="required|length:0,50"
-            />
+        <div>
+          <FormKit
+            v-model="newPost.title"
+            type="text"
+            label="Title"
+            validation="required|length:0,50"
+          />
             <FormKit
               v-model="newPost.body"
               type="textarea"
@@ -69,6 +69,7 @@ import { usePostStore } from "@/modules/auth/store/postStore";
 import { error } from "../common/NotificationPlugin";
 import { useAuthStore } from "@/modules/auth/store/authStore";
 import Tags from "../common/tags/Tags.vue";
+import { ref } from "vue";
 
 
 const emit = defineEmits(["close-modal"]);

@@ -1,9 +1,14 @@
 <template>
-    <TestTable />
+    <ProductsTable :products="products"/>
 </template>
 
 <script setup lang="ts">
-import TestTable from '@/components/common/tables/TestTable.vue';
+import { computed } from 'vue';
+import { useProductStore } from '../../store/productStore';
+
+const productStore = useProductStore();
+
+const products = computed(() => productStore.products)
 
 
 </script>

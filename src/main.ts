@@ -5,6 +5,7 @@ import App from "./App.vue";
 import router from "./router/router";
 import i18n from "@/i18n";
 import globalPlugins from "@/plugins/globalPlugins";
+import ClickOutside from "@/directives/ClickOutsideDirective.js"
 
 import "@formkit/themes/genesis";
 import "@/assets/css/index.scss";
@@ -16,4 +17,5 @@ createApp(App)
   .use(router)
   .use(globalPlugins)
   .use(formKitPlugin, defaultConfig)
+  .directive('click-outside', ClickOutside)
   .mount("#app");

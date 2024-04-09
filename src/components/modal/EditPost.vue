@@ -5,11 +5,10 @@
     >
       <BaseForm 
         :actions="false" 
-        @submit="onSubmit">
-        
+        @submit="onSubmit"
+      >
         <div class="flex relative items-center justify-center mb-5">
           <h1 class="font-bold">{{ $t("Edit Post") }}</h1>
-
           <XIcon
             size="2.5x"
             class="cursor-pointer absolute right-2"

@@ -55,7 +55,7 @@ const post = computed(
 watch(
   post,
   (newPost) => {
-    if (newPost)
+    if ( newPost.id )
     postStore.getComments(post.value);
   },
   { immediate: true }

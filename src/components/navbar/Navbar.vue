@@ -7,7 +7,7 @@
         }}</RouterLink>
       </div>
 
-      <div class="flex gap-3">
+      <div class="flex gap-5">
         <RouterLink class="text-white text-md" to="/products">{{
           $t("Products")
         }}</RouterLink>

@@ -1,8 +1,12 @@
 <template>
-  <div class="relative ml-3" @click="toggleMenu">
+  <div 
+    v-click-outside="hideDropdown"
+    class="relative ml-3"
+  >
     <div>
       <button
         class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+        @click="toggleMenu"
       >
         <span class="absolute -inset-1.5" />
         <span class="sr-only">{{ $t("Open user menu") }}</span>
@@ -51,6 +55,10 @@ const isMenuOpen = ref(false);
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
+
+function hideDropdown() {
+  isMenuOpen.value = false;
+}
 
 const authStore = useAuthStore();
 const userImage = computed(() => authStore.profile?.image);
