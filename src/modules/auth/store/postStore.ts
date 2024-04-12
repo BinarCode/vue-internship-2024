@@ -78,11 +78,13 @@ export const usePostStore = defineStore("post", {
         if (post.id === this.comments.postId) {
           return;
         }
+        
         this.comments.data = [];
         this.totalComments = 0;
         const response = await axios.get(`/posts/${post.id}/comments`);
         this.comments.data = response.comments;
         this.totalComments = response.total;
+        this.comments.postId = post.id
 
         return response;
       } catch (error) {
